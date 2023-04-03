@@ -3,21 +3,16 @@ package com.itclimb.mylittlelemoncomposablelab
 
 import android.content.Context.MODE_PRIVATE
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -51,30 +46,50 @@ fun onBoarding(navController: NavHostController) {
             ) {
                 HeaderProfile();
 
+                Box(
+                    modifier = Modifier
+                        .background(colorResource(id = R.color.darkGreen))
+                        .padding (vertical =30.dp).fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+
+                ) {
+
+                    Text(
+                        text = "Let's get to know you",
+                        color = Color.White,
+                        modifier = Modifier.padding(vertical = 20.dp),
+                        fontFamily = markaziFontFamily,
+                        fontSize = 40.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+                }
+
                 Text(
-                    text = "Let's get to know you",
+                    text = "Personal information",
                     fontFamily = karlaFontFamily,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.ExtraBold,
                     modifier = Modifier
                         .padding(horizontal = 10.dp)
-                        .padding(vertical = 10.dp)
+                        .padding(vertical = 40.dp)
 
                 )
 
                 Text(text = "First name:",
                     fontFamily = karlaFontFamily,
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.ExtraBold,
+                    fontWeight = FontWeight.Normal,
                     modifier = Modifier.
                     padding(horizontal = 10.dp).
                     padding(top = 10.dp)
                 )
-                TextField(value = firstName,
+                OutlinedTextField(value = firstName,
+                    shape = RoundedCornerShape(15.dp),
+                    singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colorResource(id = R.color.lightGrey)).
-                        padding(horizontal = 10.dp),
+                        .background(Color.White)
+                        .padding(horizontal = 10.dp),
                     textStyle = TextStyle(
                         fontFamily = karlaFontFamily,
                         fontSize = 16.sp,
@@ -89,17 +104,19 @@ fun onBoarding(navController: NavHostController) {
                 Text(text = "Last name:",
                     fontFamily = karlaFontFamily,
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.ExtraBold,
+                    fontWeight = FontWeight.Normal,
                     modifier = Modifier.
                     padding(horizontal = 10.dp).
                     padding(top = 10.dp)
                 )
 
-                TextField(value = lastName,
+                OutlinedTextField(value = lastName,
+                    shape = RoundedCornerShape(15.dp),
+                    singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colorResource(id = R.color.lightGrey)).
-                        padding(horizontal = 10.dp),
+                        .background(Color.White)
+                        .padding(horizontal = 10.dp),
                     textStyle = TextStyle(
                         fontFamily = karlaFontFamily,
                         fontSize = 16.sp,
@@ -114,16 +131,18 @@ fun onBoarding(navController: NavHostController) {
                 Text(text = "email:",
                     fontFamily = karlaFontFamily,
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.ExtraBold,
+                    fontWeight = FontWeight.Normal,
                     modifier = Modifier.
                     padding(horizontal = 10.dp).
                     padding(top = 10.dp))
 
-                TextField(value = email,
+                OutlinedTextField(value = email,
+                    shape = RoundedCornerShape(15.dp),
+                    singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colorResource(id = R.color.lightGrey)).
-                        padding(horizontal = 10.dp),
+                        .background(Color.White)
+                        .padding(horizontal = 10.dp),
                     textStyle = TextStyle(
                         fontFamily = karlaFontFamily,
                         fontSize = 16.sp,
@@ -134,6 +153,7 @@ fun onBoarding(navController: NavHostController) {
                         email = emailText
                     })
 
+                Spacer(modifier = Modifier.weight(1f))
 
                 Button(
                     onClick = {
@@ -155,8 +175,12 @@ fun onBoarding(navController: NavHostController) {
 
                     },
                     colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.yellow)),
-                    modifier = Modifier.padding(horizontal = 10.dp).
-                    padding(top=20.dp).clip (RoundedCornerShape(30.dp))
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp)
+                        .padding(vertical = 20.dp)
+                        .fillMaxWidth()
+                        .height(45.dp)
+                        .clip(RoundedCornerShape(15.dp))
 
                 ) {
                     Text(text = "Register")

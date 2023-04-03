@@ -1,7 +1,9 @@
 package com.itclimb.mylittlelemoncomposablelab
 
 import android.content.Context
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -41,28 +43,31 @@ fun onProfile(navController: NavHostController) {
                 email="";
             };
 
-            Text(text = "Profile information:",
+            Text(text = "Personal information",
                 fontFamily = karlaFontFamily,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
-                    .padding(vertical = 10.dp)
+                    .padding(vertical = 40.dp)
             )
             Text(text = "First name:",
                 fontFamily = karlaFontFamily,
                 fontSize = 18.sp,
-                fontWeight = FontWeight.ExtraBold,
+                fontWeight = FontWeight.Normal,
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
                     .padding(top = 10.dp)
             )
 
-            TextField(value = firstName,
+            OutlinedTextField(value = firstName,
+                shape = RoundedCornerShape(15.dp),
+                singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(colorResource(id = R.color.lightGrey))
+                    .background(Color.White)
                     .padding(horizontal = 10.dp),
+
                 textStyle = TextStyle(
                     fontFamily = karlaFontFamily,
                     fontSize = 16.sp,
@@ -75,16 +80,18 @@ fun onProfile(navController: NavHostController) {
             Text(text = "Last name:",
                 fontFamily = karlaFontFamily,
                 fontSize = 18.sp,
-                fontWeight = FontWeight.ExtraBold,
+                fontWeight = FontWeight.Normal,
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
                     .padding(top = 10.dp)
             )
 
-            TextField(value = lastName,
+            OutlinedTextField(value = lastName,
+                shape = RoundedCornerShape(15.dp),
+                singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(colorResource(id = R.color.lightGrey))
+                    .background(Color.White)
                     .padding(horizontal = 10.dp),
                 textStyle = TextStyle(
                     fontFamily = karlaFontFamily,
@@ -98,15 +105,18 @@ fun onProfile(navController: NavHostController) {
             Text(text = "email:",
                 fontFamily = karlaFontFamily,
                 fontSize = 18.sp,
-                fontWeight = FontWeight.ExtraBold,
+                fontWeight = FontWeight.Normal,
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
                     .padding(top = 10.dp))
 
-            TextField(value = email,
+
+            OutlinedTextField(value = email,
+                shape = RoundedCornerShape(15.dp),
+                singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(colorResource(id = R.color.lightGrey))
+                    .background(Color.White)
                     .padding(horizontal = 10.dp),
                 textStyle = TextStyle(
                     fontFamily = karlaFontFamily,
@@ -116,7 +126,7 @@ fun onProfile(navController: NavHostController) {
                 ),
                 onValueChange = { })
 
-           Row(){
+                Spacer(modifier = Modifier.weight(1f))
 
                 Button(onClick = {
                     sharedPref.edit().clear().commit();
@@ -125,8 +135,12 @@ fun onProfile(navController: NavHostController) {
                    colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.yellow)),
                     modifier = Modifier
                         .padding(horizontal = 10.dp)
-                        .padding(top = 20.dp)
-                        .clip(RoundedCornerShape(30.dp))
+                        .padding(vertical = 20.dp)
+                        .fillMaxWidth()
+                        .height(45.dp)
+                        .clip(RoundedCornerShape(15.dp))
+
+
 
                 ) {
                     Text(text = "Log out",
@@ -137,22 +151,7 @@ fun onProfile(navController: NavHostController) {
 
                 }
 
-               Button(onClick = {  navController.navigate(Home.route) },
-                   colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.yellow)),
-                   modifier = Modifier
-                       .padding(horizontal = 10.dp)
-                       .padding(top = 20.dp)
-                       .clip(RoundedCornerShape(30.dp))
-               ) {
-                   Text(
-                       text = "Return",
-                       fontFamily = karlaFontFamily,
-                       fontWeight = FontWeight.ExtraBold,
-                       color = colorResource(id = R.color.darkGreen)
-                   )
-               }
 
-               }
 
         }
     }
