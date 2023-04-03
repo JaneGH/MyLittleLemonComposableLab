@@ -1,9 +1,8 @@
 @file:OptIn(ExperimentalGlideComposeApi::class)
 
-package com.itclimb.mylittlelemoncomposablelab
+package com.itclimb.mylittlelemoncomposablelab.screens
 
 import android.content.Context
-import android.view.MenuItem
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,20 +20,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.itclimb.mylittlelemoncomposablelab.*
+import com.itclimb.mylittlelemoncomposablelab.R
+import com.itclimb.mylittlelemoncomposablelab.database.HomeViewModel
+import com.itclimb.mylittlelemoncomposablelab.database.MenuItemRoom
+import com.itclimb.mylittlelemoncomposablelab.navigation.Profile
+import com.itclimb.mylittlelemoncomposablelab.ui.karlaFontFamily
+import com.itclimb.mylittlelemoncomposablelab.ui.markaziFontFamily
 
 import com.itclimb.mylittlelemoncomposablelab.ui.theme.MyLittleLemonComposableLabTheme
 

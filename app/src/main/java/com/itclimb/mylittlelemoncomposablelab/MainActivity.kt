@@ -9,6 +9,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
+import com.itclimb.mylittlelemoncomposablelab.database.HomeViewModel
+import com.itclimb.mylittlelemoncomposablelab.navigation.MyNavigation
 import com.itclimb.mylittlelemoncomposablelab.ui.theme.MyLittleLemonComposableLabTheme
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -30,10 +32,6 @@ class MainActivity : ComponentActivity() {
         }
 
      }
-
-//    private val database by lazy {
-//        Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database").build()
-//    }
 
 
 

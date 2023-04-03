@@ -1,5 +1,6 @@
 package com.itclimb.mylittlelemoncomposablelab
 
+import com.itclimb.mylittlelemoncomposablelab.database.MenuItemRoom
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

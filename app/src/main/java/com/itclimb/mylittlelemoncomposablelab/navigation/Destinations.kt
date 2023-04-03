@@ -1,17 +1,17 @@
-package com.itclimb.mylittlelemoncomposablelab
+package com.itclimb.mylittlelemoncomposablelab.navigation
 
 interface Destinations {
     val route:String
 }
 
-object Onboarding:Destinations{
+object Onboarding: Destinations {
     override val route = "Onboarding"
 }
 
-object  Home:Destinations {
+object  Home: Destinations {
     override val route = "Home"
 }
 
-object Profile:Destinations{
+object Profile: Destinations {
     override val route = "Profile"
 }

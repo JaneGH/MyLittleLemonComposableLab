@@ -1,4 +1,4 @@
-package com.itclimb.mylittlelemoncomposablelab
+package com.itclimb.mylittlelemoncomposablelab.screens
 
 
 import android.content.Context.MODE_PRIVATE
@@ -18,6 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.itclimb.mylittlelemoncomposablelab.ui.HeaderProfile
+import com.itclimb.mylittlelemoncomposablelab.R
+import com.itclimb.mylittlelemoncomposablelab.ui.karlaFontFamily
+import com.itclimb.mylittlelemoncomposablelab.ui.markaziFontFamily
+import com.itclimb.mylittlelemoncomposablelab.navigation.Home
 
 
 @Composable
@@ -29,13 +34,19 @@ fun onBoarding(navController: NavHostController) {
             mutableStateOf("")
         }
 
+
         var lastName by remember {
             mutableStateOf("")
         }
 
+
         var email by remember {
             mutableStateOf("")
         }
+
+        val isValidFirstName = firstName.isNotBlank()
+        val isValidLastName = lastName.isNotBlank()
+        val isValidEmail = email.isNotBlank()
 
 
 
@@ -84,6 +95,7 @@ fun onBoarding(navController: NavHostController) {
                     padding(top = 10.dp)
                 )
                 OutlinedTextField(value = firstName,
+                    isError = !isValidFirstName,
                     shape = RoundedCornerShape(15.dp),
                     singleLine = true,
                     modifier = Modifier
@@ -112,6 +124,7 @@ fun onBoarding(navController: NavHostController) {
 
                 OutlinedTextField(value = lastName,
                     shape = RoundedCornerShape(15.dp),
+                    isError = !isValidLastName,
                     singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -138,6 +151,7 @@ fun onBoarding(navController: NavHostController) {
 
                 OutlinedTextField(value = email,
                     shape = RoundedCornerShape(15.dp),
+                    isError = !isValidEmail,
                     singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()

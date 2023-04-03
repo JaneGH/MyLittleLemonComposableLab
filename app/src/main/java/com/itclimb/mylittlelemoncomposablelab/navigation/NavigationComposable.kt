@@ -1,10 +1,13 @@
-package com.itclimb.mylittlelemoncomposablelab
+package com.itclimb.mylittlelemoncomposablelab.navigation
 
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.itclimb.mylittlelemoncomposablelab.screens.onBoarding
+import com.itclimb.mylittlelemoncomposablelab.screens.onProfile
+import com.itclimb.mylittlelemoncomposablelab.screens.onHome
 
 
 @Composable
