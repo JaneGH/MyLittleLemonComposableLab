@@ -1,9 +1,7 @@
-package com.itclimb.mylittlelemoncomposablelab
+package com.itclimb.mylittlelemoncomposablelab.screens
 
 import android.content.Context
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -17,6 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.itclimb.mylittlelemoncomposablelab.ui.HeaderProfile
+import com.itclimb.mylittlelemoncomposablelab.R
+import com.itclimb.mylittlelemoncomposablelab.ui.karlaFontFamily
+import com.itclimb.mylittlelemoncomposablelab.navigation.Onboarding
 
 @Composable
 fun onProfile(navController: NavHostController) {

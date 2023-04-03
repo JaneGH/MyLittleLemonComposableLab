@@ -1,8 +1,9 @@
-package com.itclimb.mylittlelemoncomposablelab
+package com.itclimb.mylittlelemoncomposablelab.ui
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import com.itclimb.mylittlelemoncomposablelab.R
 
 
 val markaziFontFamily = FontFamily(
