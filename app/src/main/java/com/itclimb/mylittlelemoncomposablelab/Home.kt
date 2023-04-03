@@ -231,13 +231,9 @@ fun MainPanelHome(context: Context) {
 
     Box ( modifier = Modifier
         .fillMaxWidth()
-        //.fillMaxHeight(0.45f)
         .background(colorResource(R.color.darkGreen)),
      ){
         Column() {
-
-            Column(modifier = Modifier.padding(3.dp)) {
-
 
                 Text(
                     text = "Little Lemon",
@@ -256,8 +252,9 @@ fun MainPanelHome(context: Context) {
                     fontSize = 40.sp,
                     color = Color.White,
                     modifier = Modifier.padding(horizontal = 10.dp)
+                        .offset(0.dp,(-20).dp)
                 )
-            }
+
 
             Row() {
 
@@ -268,10 +265,7 @@ fun MainPanelHome(context: Context) {
                     fontFamily = karlaFontFamily,
                     modifier = Modifier
                         .fillMaxWidth(0.6f)
-                        .padding(vertical = 30.dp)
                         .padding(horizontal = 10.dp)
-
-
 
                 )
 
@@ -281,9 +275,9 @@ fun MainPanelHome(context: Context) {
                     contentScale = ContentScale.Crop,
 
                     modifier = Modifier
-                        .size(160.dp, 160.dp)
-                        .padding(vertical = 10.dp)
+                        .size(150.dp, 150.dp)
                         .padding(horizontal = 10.dp)
+                        .padding(bottom = 10.dp)
                         .clip(RoundedCornerShape(16.dp))
 
                 )
