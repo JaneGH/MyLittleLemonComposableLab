@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -22,6 +25,9 @@ import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,18 +43,8 @@ import com.itclimb.mylittlelemoncomposablelab.ui.theme.MyLittleLemonComposableLa
 fun onHome(navController: NavHostController, context: Context) {
     Column() {
         Header(navController)
-        MainPanelHome()
-//        Button(onClick = {
-//            navController.navigate(Profile.route)
-//        },
-//            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Yellow)
-//
-//        ) {
-//            Text(text = "Profile")
-//
-//        }
+        MainPanelHome(context)
 
-        setDatabaseList(context)
     }
 
 
@@ -57,11 +53,8 @@ fun onHome(navController: NavHostController, context: Context) {
 
 
 @Composable
-fun setDatabaseList( context: Context){
+fun setDatabaseList( ){
 
-    val viewModel: HomeViewModel = HomeViewModel(context)
-
-    val databaseMenuItems by viewModel.getMenuItems ().observeAsState(emptyList())
 
     MyLittleLemonComposableLabTheme {
 
@@ -71,57 +64,14 @@ fun setDatabaseList( context: Context){
                 .padding(16.dp)
         ) {
 
-            var orderMenuItems by remember { mutableStateOf(false) }
-            var searchPhrase by remember { mutableStateOf("") }
-
-            var menuItems = if ((orderMenuItems) && (searchPhrase.isNotEmpty())) {
-                databaseMenuItems.sortedBy { it.title }.filter {
-                    it.title.contains(searchPhrase, ignoreCase = true)
-                }
-            }  else if (orderMenuItems) {
-                databaseMenuItems.sortedBy { it.title }
-            }  else if (searchPhrase.isNotEmpty()) {
-                databaseMenuItems.sortedBy { it.title }.filter {
-                    it.title.contains(searchPhrase, ignoreCase = true)}
-            } else {
-                databaseMenuItems
-            }
-
-
-            if (searchPhrase.isNotEmpty()) {
-                menuItems.filter {
-                    it.title.contains(searchPhrase, ignoreCase = true)
-                }
-            }
-
             // add Button code here
             Column(
                 modifier = Modifier. fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Button(onClick = {
-                    orderMenuItems = true;
-                    databaseMenuItems.sortedBy { it.title }
-                }) {
-                    Text("Tap to Order By Name")
-                }
-
-
-                OutlinedTextField(
-                    value = searchPhrase,
-                    singleLine = true,
-                    onValueChange = {
-                        searchPhrase = it
-                    },
-                    label = { Text("Search") },
-                    modifier = Modifier.padding(start = 50.dp, end = 50.dp)
-                )
-
 
             }
 
-
-            MenuItemsList(menuItems)
         }
     }
 }
@@ -142,18 +92,31 @@ private fun MenuItemsList(items: List<MenuItemRoom>) {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column() {
-                        Text(menuItem.title)
+                        Text(menuItem.title,
+                            fontFamily = karlaFontFamily,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            modifier = Modifier.
+                            padding(horizontal = 10.dp)
+                        )
                         Row() {
 
 
                             Column(modifier = Modifier.fillMaxWidth(0.7f)) {
-                                Text(menuItem.description)
+                                Text(menuItem.description,
+                                    fontFamily = karlaFontFamily,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Normal,
+                                    modifier = Modifier.padding(vertical = 10.dp).
+                                            padding(horizontal = 10.dp)
+                                    )
                                 Text(
-    //                            modifier = Modifier
-    //                                .weight(1f)
-    //                                .padding(5.dp),
-    //                            textAlign = TextAlign.Right,
-                                    text = "$%.2f".format(menuItem.price)
+                                    fontFamily = karlaFontFamily,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    text = "$%.2f".format(menuItem.price),
+                                    modifier = Modifier.
+                                    padding(horizontal = 10.dp)
                                 )
                             }
 
@@ -161,7 +124,8 @@ private fun MenuItemsList(items: List<MenuItemRoom>) {
                                     model = menuItem.image,
                                     contentScale = ContentScale.Crop,
                                     contentDescription = "dish image for " + menuItem.title,
-                                    modifier = Modifier.size(100.dp,100.dp)
+                                    modifier = Modifier
+                                        .size(100.dp, 100.dp)
                                         .padding(horizontal = 5.dp)
                                )
 
@@ -188,7 +152,7 @@ fun Header(navController: NavHostController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(60.dp),
                 horizontalArrangement = Arrangement.End
 
             ) {
@@ -200,7 +164,7 @@ fun Header(navController: NavHostController) {
                         painter = painterResource(id = R.drawable.logo),
                         contentDescription = "Little Lemon Logo",
                         modifier = Modifier
-                            .size(150.dp)
+                            .size(180.dp)
                     )
                 }
 
@@ -227,67 +191,160 @@ fun Header(navController: NavHostController) {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun MainPanelHomePreview() {
-    MainPanelHome()
-}
 
 @Composable
-fun MainPanelHome() {
+fun MainPanelHome(context: Context) {
+
+
+    val viewModel: HomeViewModel = HomeViewModel(context)
+
+    val databaseMenuItems by viewModel.getMenuItems ().observeAsState(emptyList())
+
+
+    var orderMenuItems by remember { mutableStateOf(false) }
+    var searchPhrase by remember { mutableStateOf("") }
+    var category by remember {mutableStateOf("")}
+
+    var menuItems = if ((orderMenuItems) && (searchPhrase.isNotEmpty())) {
+        databaseMenuItems.sortedBy { it.title }.filter {
+            it.title.contains(searchPhrase, ignoreCase = true)
+        }
+    }  else if (orderMenuItems) {
+        databaseMenuItems.sortedBy { it.title }
+    }  else if (searchPhrase.isNotEmpty()) {
+        databaseMenuItems.sortedBy { it.title }.filter {
+            it.title.contains(searchPhrase, ignoreCase = true)}
+    } else {
+        databaseMenuItems
+    }
+
+    if (searchPhrase.isNotEmpty()) {
+        menuItems.filter {
+            it.title.contains(searchPhrase, ignoreCase = true)
+        }
+    }
+
+    if (category.isNotEmpty()){
+        menuItems = menuItems.filter {it.category==category}
+
+    }
+
     Box ( modifier = Modifier
         .fillMaxWidth()
-        .fillMaxHeight(0.3f)
-
         .background(colorResource(R.color.darkGreen)),
      ){
         Column() {
-            Text(
-                text = "Little Lemon",
-                fontSize = 30.sp,
-                color = Color.Yellow,
-                modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .padding(vertical = 5.dp)
 
-            )
+                Text(
+                    text = "Little Lemon",
+                    fontFamily = markaziFontFamily,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 60.sp,
+                    color = colorResource(id = R.color.yellow),
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp)
 
-            Text(
-                text = "Chicago",
-                fontSize = 20.sp,
-                color = Color.White,
-                modifier = Modifier.padding(horizontal = 10.dp)
-            )
+                )
+
+                Text(
+                    text = "Chicago",
+                    fontFamily = markaziFontFamily,
+                    fontSize = 40.sp,
+                    color = Color.White,
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                        .offset(0.dp,(-20).dp)
+                )
+
 
             Row() {
 
                 Text(
                     text = "We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.",
-                    fontSize = 15.sp,
+                    fontSize = 18.sp,
                     color = Color.White,
+                    fontFamily = karlaFontFamily,
                     modifier = Modifier
                         .fillMaxWidth(0.6f)
-                        .padding(vertical = 10.dp)
                         .padding(horizontal = 10.dp)
 
-
-
                 )
+
 
                 Image( painter = painterResource(id = R.drawable.hero_image),
                     contentDescription = "Herro Image",
                     contentScale = ContentScale.Crop,
+
                     modifier = Modifier
-                        .size(140.dp, 140.dp)
-                        .padding(vertical = 10.dp)
-                        .padding(horizontal = 5.dp)
+                        .size(150.dp, 150.dp)
+                        .padding(horizontal = 10.dp)
+                        .padding(bottom = 10.dp)
+                        .clip(RoundedCornerShape(16.dp))
 
                 )
+
+            }
+
+            TextField(
+                value = searchPhrase,
+                singleLine = true,
+                placeholder = { Text("Enter Search Phrase") },
+                onValueChange = {
+                    searchPhrase = it
+                },
+                shape = RoundedCornerShape(16.dp),
+                label = { Text("Search") },
+                leadingIcon = {
+                    Icon(
+                        Icons.Default.Search,
+                        contentDescription = "Search"
+                    )
+                },
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = colorResource(id = R.color.lightGrey) // Set the background color to white
+                ),
+                modifier = Modifier
+                    .padding(start = 10.dp, end = 10.dp, bottom = 10.dp)
+                    .fillMaxWidth())
+        }
+    }
+
+    Text(text = "ORDER FOR DELIVERY!",
+        fontFamily = karlaFontFamily,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.ExtraBold,
+        modifier = Modifier
+            .padding(top = 20.dp)
+            .padding(horizontal = 10.dp)
+    )
+
+    val categoryList = databaseMenuItems.map{ it.category }.distinct().toList();
+    Row(){
+        categoryList.forEach {
+            Button(onClick = {
+                 category = it
+            },
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.lightGrey)),
+                modifier = Modifier
+                    .padding(5.dp)
+                    .clip(RoundedCornerShape(30.dp))
+
+            ) {
+                Text(text = it,
+                    fontFamily = karlaFontFamily,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = colorResource(id = R.color.darkGreen))
 
             }
         }
     }
 
+    Divider(modifier = Modifier.padding(vertical = 10.dp))
+    MenuItemsList(menuItems)
+
+}
+
+@Composable
+fun setCategories(menuItems: List<MenuItemRoom>) {
 
 
 }

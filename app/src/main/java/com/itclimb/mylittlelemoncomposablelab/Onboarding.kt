@@ -3,16 +3,19 @@ package com.itclimb.mylittlelemoncomposablelab
 
 import android.content.Context.MODE_PRIVATE
 import android.widget.Toast
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
@@ -36,35 +39,121 @@ fun onBoarding(navController: NavHostController) {
 
 
 
+
         Box {
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                Image(
-                    painter = painterResource(R.drawable.logo),
-                    contentDescription = "My Image",
-                    modifier = Modifier.fillMaxWidth()
-                )
+                HeaderProfile();
+
+                Box(
+                    modifier = Modifier
+                        .background(colorResource(id = R.color.darkGreen))
+                        .padding (vertical =30.dp).fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+
+                ) {
+
+                    Text(
+                        text = "Let's get to know you",
+                        color = Color.White,
+                        modifier = Modifier.padding(vertical = 20.dp),
+                        fontFamily = markaziFontFamily,
+                        fontSize = 40.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+                }
 
                 Text(
-                    text = "Let's get to know you",
-                    fontSize = 30.sp
+                    text = "Personal information",
+                    fontFamily = karlaFontFamily,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp)
+                        .padding(vertical = 40.dp)
 
                 )
-                TextField(value = firstName,
+
+                Text(text = "First name:",
+                    fontFamily = karlaFontFamily,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier.
+                    padding(horizontal = 10.dp).
+                    padding(top = 10.dp)
+                )
+                OutlinedTextField(value = firstName,
+                    shape = RoundedCornerShape(15.dp),
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White)
+                        .padding(horizontal = 10.dp),
+                    textStyle = TextStyle(
+                        fontFamily = karlaFontFamily,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Black
+                    ),
                     onValueChange = { firstNameText ->
                         firstName = firstNameText
                     })
 
-                TextField(value = lastName,
+
+                Text(text = "Last name:",
+                    fontFamily = karlaFontFamily,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier.
+                    padding(horizontal = 10.dp).
+                    padding(top = 10.dp)
+                )
+
+                OutlinedTextField(value = lastName,
+                    shape = RoundedCornerShape(15.dp),
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White)
+                        .padding(horizontal = 10.dp),
+                    textStyle = TextStyle(
+                        fontFamily = karlaFontFamily,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Black
+                    ),
                     onValueChange = { lastNameText ->
                         lastName = lastNameText
                     })
 
-                TextField(value = email,
+
+                Text(text = "email:",
+                    fontFamily = karlaFontFamily,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier.
+                    padding(horizontal = 10.dp).
+                    padding(top = 10.dp))
+
+                OutlinedTextField(value = email,
+                    shape = RoundedCornerShape(15.dp),
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White)
+                        .padding(horizontal = 10.dp),
+                    textStyle = TextStyle(
+                        fontFamily = karlaFontFamily,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Black
+                    ),
                     onValueChange = { emailText ->
                         email = emailText
                     })
+
+                Spacer(modifier = Modifier.weight(1f))
 
                 Button(
                     onClick = {
@@ -85,7 +174,14 @@ fun onBoarding(navController: NavHostController) {
                         }
 
                     },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Yellow)
+                    colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.yellow)),
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp)
+                        .padding(vertical = 20.dp)
+                        .fillMaxWidth()
+                        .height(45.dp)
+                        .clip(RoundedCornerShape(15.dp))
+
                 ) {
                     Text(text = "Register")
                 }
