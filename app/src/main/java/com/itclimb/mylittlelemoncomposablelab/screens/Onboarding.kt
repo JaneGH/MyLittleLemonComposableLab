@@ -33,20 +33,24 @@ fun onBoarding(navController: NavHostController) {
         var firstName by remember {
             mutableStateOf("")
         }
+        var isValidFirstName by remember {
+            mutableStateOf(firstName.isNotBlank())
+        }
 
 
         var lastName by remember {
             mutableStateOf("")
         }
-
+        var isValidLastName by remember {
+            mutableStateOf(lastName.isNotBlank())
+        }
 
         var email by remember {
             mutableStateOf("")
         }
-
-        val isValidFirstName = firstName.isNotBlank()
-        val isValidLastName = lastName.isNotBlank()
-        val isValidEmail = email.isNotBlank()
+        var isValidEmail by remember {
+            mutableStateOf(email.isNotBlank())
+        }
 
 
 
